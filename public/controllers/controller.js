@@ -7,7 +7,8 @@ Colortask1.controller('Colortask1Ctrl', ['$scope', '$http', function($scope, $ht
 		$http.get('/colortask_1').success(function(response) {
 			console.log("I got the data I requested");
 			$scope.colortask_1 = response;
-			$scope.proj = "";
+   		$scope.proj = "";
+
 		});
 	}
 
@@ -20,7 +21,7 @@ Colortask1.controller('Colortask1Ctrl', ['$scope', '$http', function($scope, $ht
 			//$scope.proj._id="";
 			$http.post('/colortask_1', $scope.proj).success(function(response) {
 			console.log(response);
-			//refresh();
+			refresh();
 		});
 	}; 
 

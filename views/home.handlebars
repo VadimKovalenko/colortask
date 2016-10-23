@@ -4,7 +4,9 @@
 		<input type="text" ng-model="proj.data">
 		<button type = "submit" ng-click="addData()">Add</button>
 	</form>
-	<div ng-repeat = "proj in colortask_1">
-		<p>{[{proj.data}]}</p>
+	<div class = "proj-container">
+		<div class = "proj-color" ng-repeat = "proj in colortask_1" ng-style = '{"background": (proj.data)}'>
+			<p>{[{proj.data}]}</p>
+		</div>
 	</div>
 </div>
