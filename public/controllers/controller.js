@@ -7,11 +7,10 @@ Colortask1.controller('Colortask1Ctrl', ['$scope', '$http', function($scope, $ht
 		$http.get('/colortask_1').success(function(response) {
 			console.log("I got the data I requested");
 			$scope.colortask_1 = response;
-   		$scope.proj = "";
+   		//$scope.proj = "";
 
 		});
 	}
-
 
 	refresh();
 
@@ -30,4 +29,4 @@ Colortask1.controller('Colortask1Ctrl', ['$scope', '$http', function($scope, $ht
 Colortask1.config(function($interpolateProvider) {
   $interpolateProvider.startSymbol('{[{');
   $interpolateProvider.endSymbol('}]}');
-});	
+});

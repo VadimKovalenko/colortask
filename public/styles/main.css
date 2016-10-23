@@ -1,9 +1,14 @@
 .proj-color {
 	border: 1px solid black;
-	height: 30px;
-	width: 30px;
-	display: inline-block;
+	height: 60px;
+	width: 60px;
+	float: left;
 	margin: 5px;
+}
+
+.proj-color>p {
+	font-size: 12px;
+	text-align: center;
 }
 
 footer {
