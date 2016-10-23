@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="Colortask1">
+<html lang="en" ng-app="fooApp">
 <head>
 	<meta charset="UTF-8">
 	<title>ColorTask-1</title>
@@ -14,11 +14,34 @@
 	<!--Bootstrap-->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<script>
+		var model = [
+			{"foo":"first"},
+			{"foo":"second"},
+			{"foo":"third"}
+		];
+
+		var fooApp = angular.module("fooApp", []);
+
+		fooApp.controller("fooAppCtrl", function($scope) {
+			$scope.data = model;
+		});
+
+		fooApp.config(function($interpolateProvider) {
+		  $interpolateProvider.startSymbol('{[{');
+		  $interpolateProvider.endSymbol('}]}');
+		});
+	</script>
 </head>
-<body ng-controller = "Colortask1Ctrl">
+<body ng-controller = "fooAppCtrl">
 	<header>ColorTask Logo</header>
 		{{{ body }}}
 	<footer>Author: Vadim Kovalenko 2016</footer>
 	<script src = "public/controllers/controller.js"></script>
+
+	<div ng-repeat = "proj in data">
+		<p>{[{proj.foo}]}</p>
+	</div>
+
 </body>
 </html>
