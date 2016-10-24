@@ -8,11 +8,15 @@ Colortask1.controller('Colortask1Ctrl', ['$scope', '$http', function($scope, $ht
 			console.log("I got the data I requested");
 			$scope.colortask_1 = response;
    		//$scope.proj = "";
-
+   		$scope.activeMenu = $scope.colortask_1[0];
 		});
 	}
 
 	refresh();
+
+	$scope.setActive = function(proj_item) {
+		$scope.activeMenu = proj_item;
+	};
 
 	//Добавление в БД данных
 	$scope.addData = function() {
