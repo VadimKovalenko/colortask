@@ -2,13 +2,8 @@ header {
 	text-align: center;
 }
 
-.txt {
-	display: block;
-}
-
 .active {
-	box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2), 0 6px 5px 0 rgba(0, 0, 0, 0.19);
-	color: red;
+	box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.4), 0 6px 5px 0 rgba(0, 0, 0, 0.4);
 }
 
 .proj-color {
