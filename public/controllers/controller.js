@@ -8,14 +8,15 @@ Colortask1.controller('Colortask1Ctrl', ['$scope', '$http', function($scope, $ht
 			console.log("I got the data I requested");
 			$scope.colortask_1 = response;
    		//$scope.proj = "";
-   		$scope.activeMenu = $scope.colortask_1[0];
+   		//Установка по умолчанию
+   		$scope.activeItem = $scope.colortask_1[0];
 		});
 	}
 
 	refresh();
 
 	$scope.setActive = function(proj_item) {
-		$scope.activeMenu = proj_item;
+		$scope.activeItem = proj_item;
 		//console.log($scope.activeMenu.data);
 	};
 
@@ -27,6 +28,14 @@ Colortask1.controller('Colortask1Ctrl', ['$scope', '$http', function($scope, $ht
 			console.log(response);
 			refresh();
 		});
+	};
+
+	//Удаление из БД
+	$scope.remove = function(id) {
+	  console.log(id);
+	  		$http.delete('/colortask_1/' + id).success(function(response) {
+	    	refresh();
+	  });
 	}; 
 
 }]);

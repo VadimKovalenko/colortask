@@ -21,7 +21,6 @@ header {
 }
 
 .proj-desc {
-	height: 100px;
 	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#e3edf3+0,ffffff+52,ffffff+100 */
 	background: rgb(227,237,243); /* Old browsers */
 	background: -moz-linear-gradient(top,  rgba(227,237,243,1) 0%, rgba(255,255,255,1) 52%, rgba(255,255,255,1) 100%); /* FF3.6-15 */
@@ -33,6 +32,27 @@ header {
 
 .proj-desc div {
 	text-align: center;
+}
+
+.decrc-btns {
+	color: #fff;
+	margin-bottom: 15px;
+}
+
+.decrc-btns .edit-btn-wrap {
+	text-align: right;
+}
+
+.edit-btn-wrap button {
+	background: #00a651;
+}
+
+.decrc-btns .del-btn-wrap {
+	text-align: left;
+}
+
+.del-btn-wrap button {
+	background: #0072bc;
 }
 
 footer {

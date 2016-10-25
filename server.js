@@ -44,5 +44,13 @@ app.get('/colortask_1/:id', function (req, res) {
   	});
 });
 
+app.delete('/colortask_1/:id', function (req, res) {
+  var id = req.params.id;
+  console.log(id);
+  db.colortask_1.remove({_id: mongojs.ObjectId(id)}, function (err, doc) {
+    res.json(doc);
+  });
+});
+
 var port = Number(process.env.PORT || 5000);
 app.listen(port);

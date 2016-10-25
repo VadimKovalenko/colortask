@@ -7,28 +7,44 @@
 			<button type = "submit" ng-click="addData()">Add</button>
 			<input type="color" id="colorPicker" ng-model="proj.data">
 		</form>
-			<div class = "proj-color" ng-class="{active : activeMenu === proj}" ng-repeat = "proj in colortask_1" ng-style = '{"background": (proj.data)}' ng-click="setActive(proj)">
+			<div class = "proj-color" ng-class="{active : activeItem === proj}" ng-repeat = "proj in colortask_1" ng-style = '{"background": (proj.data)}' ng-click="setActive(proj)">
 				<p>{[{proj.data}]}</p>
 			</div>
 			<div class="clearfix"></div>
 		</section>
-		<section class="proj-desc" ng-model="activeMenu.data">
-			<div class="col-md-3">
-				<h4>HEX</h4>
-				<p id = "hex_value">{[{activeMenu.data}]}</p>
-			</div>
-			<div class="col-md-3">
-				<h4>RGBA</h4>
-				<p></p>
-			</div>
-			<div class="col-md-3">
-				<h4>Title</h4>
-				<p></p>
-			</div>
-			<div class="col-md-3">
-				<h4>Description</h4>
-				<p></p>
-			</div>
+		<section class="proj-desc" ng-model="activeItem">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-3">
+						<h4>HEX</h4>
+						<p id = "hex_value">{[{activeItem.data}]}</p>
+					</div>
+					<div class="col-md-3">
+						<h4>RGBA</h4>
+						<p></p>
+					</div>
+					<div class="col-md-3">
+						<h4>Title</h4>
+						<p></p>
+					</div>
+					<div class="col-md-3">
+						<h4>Description</h4>
+						<p></p>
+					</div>
+				</div>
+				<div class="row decrc-btns">
+					<div class="col-md-6">
+						<div class="edit-btn-wrap">
+							<button class = "btn">edit</button>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="del-btn-wrap">
+							<button class = "btn" ng-click = "remove(activeItem._id)">delete</button>
+						</div>	
+					</div>
+				</div>	
+			</div>	
 		</section>
 	</div>
 </div>
