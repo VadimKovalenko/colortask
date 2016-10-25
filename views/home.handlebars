@@ -1,5 +1,5 @@
 <div>
-	<h3>content</h3>
+	<h3 class = "content">content</h3>
 	<div class = "proj-container" id="mainCont">
 		<section>
 		<form>
@@ -12,10 +12,10 @@
 			</div>
 			<div class="clearfix"></div>
 		</section>
-		<section class="proj-desc">
+		<section class="proj-desc" ng-model="activeMenu.data">
 			<div class="col-md-3">
 				<h4>HEX</h4>
-				<p></p>
+				<p id = "hex_value">{[{activeMenu.data}]}</p>
 			</div>
 			<div class="col-md-3">
 				<h4>RGBA</h4>

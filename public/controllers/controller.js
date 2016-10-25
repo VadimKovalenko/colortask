@@ -16,6 +16,7 @@ Colortask1.controller('Colortask1Ctrl', ['$scope', '$http', function($scope, $ht
 
 	$scope.setActive = function(proj_item) {
 		$scope.activeMenu = proj_item;
+		//console.log($scope.activeMenu.data);
 	};
 
 	//Добавление в БД данных
