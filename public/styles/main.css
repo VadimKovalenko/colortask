@@ -2,6 +2,10 @@ header {
 	text-align: center;
 }
 
+.main-sect {
+	margin-bottom: 35px;
+}
+
 .active {
 	box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.4), 0 6px 5px 0 rgba(0, 0, 0, 0.4);
 }
@@ -15,9 +19,51 @@ header {
 	cursor: pointer;
 }
 
+.hide-mini-descr {
+	display: none;
+	z-index: 10;
+	background: #eafdff;
+	position: absolute;
+	border: 1px solid #6e7778;
+}
+
+.proj-color:hover .hide-mini-descr {
+	display: block;
+}
+
 .proj-color>p {
 	font-size: 12px;
 	text-align: center;
+}
+
+.color-flag::before {
+	content: " ";
+	display: block;
+	height: 30px;
+	width: 2px;
+	background-color: #754c24;
+	position: relative;
+	left: -52px;
+	top: -12px;
+}
+
+.color-flag {
+	position: relative;
+	top: -30px;
+	color: #fff;
+	width: 0; 
+  	height: 0;
+	border-top: 12px solid transparent;
+  	border-bottom: 12px solid transparent;
+  	border-left: 50px solid;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.color-flag>b {
+	position: relative;
+	left: -40px;
+	top: -40px;
 }
 
 .proj-desc {

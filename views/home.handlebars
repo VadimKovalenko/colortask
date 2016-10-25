@@ -1,18 +1,22 @@
 <div>
 	<h3 class = "content">content</h3>
 	<div class = "proj-container" id="mainCont">
-		<section>
+		<section class = "main-sect">
 		<form>
 			<input type="text" ng-model="proj.data" id="currentColor">
 			<button type = "submit" ng-click="addData()">Add</button>
 			<input type="color" id="colorPicker" ng-model="proj.data">
 		</form>
 			<div class = "proj-color" ng-class="{active : activeItem === proj}" ng-repeat = "proj in colortask_1" ng-style = '{"background": (proj.data)}' ng-click="setActive(proj)">
-				<p>{[{proj.data}]}</p>
+				<p>{[{proj.data}]}</p>			
+			<div class="hide-mini-descr">
+				<p>{[{proj._id}]}</p>
+			</div>
 			</div>
 			<div class="clearfix"></div>
 		</section>
 		<section class="proj-desc" ng-model="activeItem">
+			<div class = "color-flag" ng-style = '{"border-left-color": (activeItem.data)}'><b>C</b></div>	
 			<div class="container">
 				<div class="row">
 					<div class="col-md-3">
