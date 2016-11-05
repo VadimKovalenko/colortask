@@ -11,11 +11,12 @@
 			<label for="descr">Description</label>
 			<input type="text" ng-model="proj.descr">
 			<button id="submit" class = "btn btn-primary" type = "submit" ng-click="addData()">Add</button>
+			<button class = "btn btn-info" ng-click="update(proj._id)">Update</button>
 		</form>
 			<div class = "proj-color" ng-class="{active : activeItem === proj}" ng-repeat = "proj in colortask_1" ng-style = '{"background": (proj.data)}' ng-click="setActive(proj)">
 				<p>{[{proj.data}]}</p>			
 			<div class="hide-mini-descr">
-				<p>{[{proj.title}]}</p>
+				<p>{[{proj._id}]}</p>
 			</div>
 			</div>
 			<div class="clearfix"></div>
@@ -29,7 +30,7 @@
 						<p id = "hex_value">{[{activeItem.data}]}</p>
 					</div>
 					<div class="col-md-3">
-						<h4>RGBA</h4>
+						<h4>HEX <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span> RGBA</h4>
 						<p></p>
 					</div>
 					<div class="col-md-3">
@@ -44,7 +45,7 @@
 				<div class="row decrc-btns">
 					<div class="col-md-6">
 						<div class="edit-btn-wrap">
-							<button class = "btn">edit</button>
+							<button class = "btn" ng-click="edit(activeItem._id)">edit</button>
 						</div>
 					</div>
 					<div class="col-md-6">

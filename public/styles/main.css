@@ -6,6 +6,10 @@ header {
 	margin-bottom: 35px;
 }
 
+.btn:hover {
+	color: #fff !important;
+}
+
 .active {
 	box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.4), 0 6px 5px 0 rgba(0, 0, 0, 0.4);
 }

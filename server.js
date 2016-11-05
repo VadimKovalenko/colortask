@@ -52,5 +52,17 @@ app.delete('/colortask_1/:id', function (req, res) {
   });
 });
 
+app.put('/colortask_1/:id', function (req, res) {
+	var id = req.params.id;
+	//console.log("Update " + req.body.data);
+	db.colortask_1.findAndModify({query: {_id: mongojs.ObjectId(id)},
+		update: {$set: {data: req.body.data,
+							 title: req.body.title,
+							 descr: req.body.descr}},
+		new: true}, function(err, doc) {
+			res.json(doc);
+		});
+});
+
 var port = Number(process.env.PORT || 5000);
 app.listen(port);

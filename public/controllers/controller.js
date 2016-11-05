@@ -38,6 +38,23 @@ Colortask1.controller('Colortask1Ctrl', ['$scope', '$http', function($scope, $ht
 	  });
 	}; 
 
+	//Редактирование
+	$scope.edit = function(id) {
+		console.log("Edit " + id);
+		$http.get('/colortask_1/' + id).success(function(response) {
+			//Bring data to the input form 
+	   	$scope.proj = response;
+	  });
+	};
+
+
+	$scope.update = function() {
+	console.log("Update " + $scope.proj._id);
+	$http.put('/colortask_1/' + $scope.proj._id, $scope.proj).success(function(response) {
+		refresh();
+		});
+	};
+
 }]);
 
 Colortask1.config(function($interpolateProvider) {
