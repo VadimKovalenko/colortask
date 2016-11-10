@@ -7,9 +7,9 @@ Colortask1.controller('Colortask1Ctrl', ['$scope', '$http', function($scope, $ht
 		$http.get('/colortask_1').success(function(response) {
 			console.log("I got the data I requested");
 			$scope.colortask_1 = response;
-   		//$scope.proj = "";
    		//Установка по умолчанию
    		$scope.activeItem = $scope.colortask_1[0];
+   		$scope.proj = "";
 		});
 	}
 
