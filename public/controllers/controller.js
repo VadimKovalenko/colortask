@@ -55,6 +55,16 @@ Colortask1.controller('Colortask1Ctrl', ['$scope', '$http', function($scope, $ht
 		});
 	};
 
+	$scope.addNewProject = function() {
+		/*console.log("HELLO, " + $scope.name);
+		$http.post('/new', $scope.name).success(function(response) {
+			$scope.name = response;
+			console.log("Hi from post-controller");*/
+			$http.get('/new', $scope.name).success(function(response) {
+				console.log(response);
+			});
+		};	
+
 }]);
 
 Colortask1.config(function($interpolateProvider) {
