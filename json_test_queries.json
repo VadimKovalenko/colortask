@@ -1,0 +1,21 @@
+db.getCollection('colortask_1').update(
+    // query 
+    {
+        "_id" : ObjectId("582c8fb919920f07ec101157")
+    },
+    
+    // update 
+    {"$push" : 
+        {"colors": 
+            {"data":"green",
+             "title":"For bold text",
+             "descr":"Here is green description"}
+         }
+    },
+    
+    // options 
+    {
+        "multi" : false,  // update only one document 
+        "upsert" : false  // insert a new document, if no existing document match the query 
+    }
+);

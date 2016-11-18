@@ -11,7 +11,7 @@ var mongojs = require('mongojs');
 //Connerct to other database collection
 var db = mongojs('colortask_1');
 //var mycollections_arr = [];
-var mycollections = db.collection('colortask_1', 'colortask_2');
+var mycollections = db.collection('colortask_1');
 
 
 /////////получение списка коллекций/////////////
@@ -44,7 +44,7 @@ app.use(bodyParser.json());
 	});
 
 	//Создание нового проекта
-	app.post('/new', function (req, res) {
+	/*app.post('/new', function (req, res) {
 		console.log("Message from the server.js: " + req.query('token'));
 		//res.json(req.body);
 		//console.log(res.json(req.body));
@@ -56,7 +56,7 @@ app.use(bodyParser.json());
 		console.log("Message from the server.js: collection name is " + mycollections);
 	});
 
-
+	*/
 	app.get('/colortask_1', function (req, res) {
 		console.log("I received a GET request");
 		mycollections.find(function(err, docs) {
@@ -65,7 +65,7 @@ app.use(bodyParser.json());
 			res.json(docs);
 		});
 	});
-
+	/*
 	app.get('/colortask_1/:id', function (req, res) {
 		var id = req.params.id;
 		console.log(id);
@@ -92,7 +92,7 @@ app.use(bodyParser.json());
 			new: true}, function(err, doc) {
 				res.json(doc);
 			});
-	});
+	});*/
 
 var port = Number(process.env.PORT || 5000);
 app.listen(port);

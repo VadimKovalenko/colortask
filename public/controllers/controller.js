@@ -8,30 +8,30 @@ Colortask1.controller('Colortask1Ctrl', ['$scope', '$http', function($scope, $ht
 			console.log("I got the data I requested");
 			$scope.colortask_1 = response;
    		//Установка по умолчанию
-   		$scope.activeItem = $scope.colortask_1[0];
+   		//$scope.activeItem = $scope.colortask_1[0];
    		$scope.proj = "";
 		});
 	}
 
 	refresh();
 
-	$scope.setActive = function(proj_item) {
+	/*$scope.setActive = function(proj_item) {
 		$scope.activeItem = proj_item;
 		//console.log($scope.activeMenu.data);
-	};
+	};*/
 
 	//Добавление в БД данных
-	$scope.addData = function() {
+	/*$scope.addData = function() {
 			//console.log($scope.proj);
 			//$scope.proj._id="";
 			$http.post('/colortask_1', $scope.proj).success(function(response) {
 			console.log(response);
 			refresh();
 		});
-	};
+	};*/
 
 	//Удаление из БД
-	$scope.remove = function(id) {
+	/*$scope.remove = function(id) {
 	  console.log(id);
 	  		$http.delete('/colortask_1/' + id).success(function(response) {
 	    	refresh();
@@ -53,18 +53,22 @@ Colortask1.controller('Colortask1Ctrl', ['$scope', '$http', function($scope, $ht
 	$http.put('/colortask_1/' + $scope.proj._id, $scope.proj).success(function(response) {
 		refresh();
 		});
-	};
+	};*/
 
 	$scope.addNewProject = function() {
 		/*console.log("HELLO, " + $scope.name);
 		$http.post('/new', $scope.name).success(function(response) {
 			$scope.name = response;
 			console.log("Hi from post-controller");*/
-			$http.get('/new', $scope.name).success(function(response) {
+			/*$http.get('/new', $scope.name).success(function(response) {
 				console.log(response);
-			});
-		};	
+			});*/
 
+			$http.post('/colortask_1', $scope.proj).success(function(response) {
+			console.log(response);
+			refresh();	
+			});	
+		};
 }]);
 
 Colortask1.config(function($interpolateProvider) {
