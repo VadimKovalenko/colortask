@@ -20,15 +20,41 @@ Colortask1.controller('Colortask1Ctrl', ['$scope', '$http', function($scope, $ht
 		//console.log($scope.activeMenu.data);
 	};*/
 
-	//Добавление в БД данных
-	/*$scope.addData = function() {
-			//console.log($scope.proj);
+	//Добавление в БД данных (сейчас вылавливаем айди проекта)
+	$scope.addData = function() {
+			
+			console.log($scope.proj._id);
+			//console.log(id);
 			//$scope.proj._id="";
-			$http.post('/colortask_1', $scope.proj).success(function(response) {
+			$http.post('/colortask_1/current/', $scope.proj).success(function(response) {
+			//console.log($scope.proj._id);
 			console.log(response);
+			//refresh();
+		});
+	};
+
+	//////////////
+	//Теситировка 2 Добавление в БД данных (сейчас вылавливаем айди проекта)
+	$scope.addData2 = function(proj) {
+			console.log(proj._id);
+			console.log(proj.data);
+			console.log(proj.title);
+			console.log(proj.descr);
+			//console.log(id);
+			//$scope.proj._id="";
+			$http.put('/colortask_1/' + proj._id, proj).success(function(response) {	
+			//console.log($scope.proj._id);
+			console.log("This is response form controller from server to current project -- " + JSON.stringify(response) + "-- end of response");
 			refresh();
 		});
-	};*/
+	};
+
+	//Эта функция может отловить данные со скоупа
+	$scope.checkScope = function(proj) {
+			alert(proj._id + " " + proj.data + " " + proj.title + " " + proj.descr);
+	};
+	//////////////
+
 
 	//Удаление из БД
 	/*$scope.remove = function(id) {
@@ -69,6 +95,9 @@ Colortask1.controller('Colortask1Ctrl', ['$scope', '$http', function($scope, $ht
 			refresh();	
 			});	
 		};
+
+
+	console.log($scope.$$watchers);	
 }]);
 
 Colortask1.config(function($interpolateProvider) {

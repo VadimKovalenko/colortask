@@ -12,7 +12,12 @@
 				<label for="descr">Description</label>
 				<input type="text" ng-model="proj.descr">
 				<button id="submit" class = "btn btn-primary" type = "submit" ng-click="addData()">Add</button>
+				<button id="submit" class = "btn btn-primary" type = "submit" ng-click="addData2(proj)">Add2</button>
+				<button id="submit" class = "btn btn-danger" type = "submit" ng-click="checkScope(proj)">Check Scope</button>
 				<button class = "btn btn-info" ng-click="update(proj._id)">Update</button>
+				<p>{[{proj.data}]}</p>
+				<p>{[{proj.title}]}</p>
+				<p>{[{proj.descr}]}</p>	
 			</form>
 			<div>
 				<div class = "proj-description" ng-repeat = "color in proj.colors">
@@ -110,5 +115,3 @@
 		  </div>
 		</div>
 	</div>
-	
-</div>

@@ -43,6 +43,50 @@ app.use(bodyParser.json());
 		});
 	});
 
+	//Для массива цветов
+	app.post('/colortask_1/current', function (req, res) {
+		var id = req.params.id;
+		console.log("This is id from server: " + id);
+		console.log("This is rquest body: " + JSON.stringify(req.body));
+		//doc - item that we parsed
+		mycollections.findOne({_id: mongojs.ObjectId(id)}, {
+			update: 	{$push:
+							{colors:
+								{
+									data: req.body.data,
+									title: req.body.title,
+									descr: req.body.descr
+								}
+							}	
+						},
+			new: true}, function(err, docs) {
+				console.log("This is from add new color request: " + JSON.stringify(docs));
+				res.json(docs);
+			});
+			//console.log("This is from add new color request: " + id);
+			//Data back to the controller
+			//console.log("This is from add new color request: " + JSON.stringify(docs));
+			//res.json(docs);
+		});
+
+
+	//Добавление в БД Тестировка №2
+	app.put('/colortask_1/:id', function (req, res) {
+		var id = req.params.id;
+		console.log("This is id from server: " + id);
+		//console.log("This is rquest body: " + JSON.stringify(req.body));
+		mycollections.findAndModify({query: {_id: mongojs.ObjectId(id)},
+					update: {$push: 
+						 {colors: {data: req.body.data,
+							 title: req.body.title,
+							 descr: req.body.descr}}},
+							 new: true},
+		 function(err, docs) {
+			//Send back data to the controller
+			res.json(docs);
+		});
+		});
+
 	//Создание нового проекта
 	/*app.post('/new', function (req, res) {
 		console.log("Message from the server.js: " + req.query('token'));
@@ -57,6 +101,7 @@ app.use(bodyParser.json());
 	});
 
 	*/
+	//Вывод всех данных с базы в консоль
 	app.get('/colortask_1', function (req, res) {
 		console.log("I received a GET request");
 		mycollections.find(function(err, docs) {
