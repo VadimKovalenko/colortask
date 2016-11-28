@@ -8,6 +8,7 @@ Colortask1.controller('Colortask1Ctrl', ['$scope', '$http', function($scope, $ht
 			console.log("I got the data I requested");
 			$scope.colortask_1 = response;
    		//Установка по умолчанию
+   		//$scope.activeItem = $scope.proj_item;
    		//$scope.activeItem = $scope.colortask_1[0];
    		$scope.proj = "";
 		});
@@ -15,43 +16,16 @@ Colortask1.controller('Colortask1Ctrl', ['$scope', '$http', function($scope, $ht
 
 	refresh();
 
-	/*$scope.setActive = function(proj_item) {
-		$scope.activeItem = proj_item;
-		//console.log($scope.activeMenu.data);
-	};*/
 
-	//Добавление в БД данных (сейчас вылавливаем айди проекта)
-	$scope.addData = function() {
-			
-			console.log($scope.proj._id);
-			//console.log(id);
-			//$scope.proj._id="";
-			$http.post('/colortask_1/current/', $scope.proj).success(function(response) {
-			//console.log($scope.proj._id);
-			console.log(response);
-			//refresh();
-		});
-	};
 
 	//////////////
-	//Теситировка 2 Добавление в БД данных (сейчас вылавливаем айди проекта)
-	$scope.addData2 = function(proj) {
-			console.log(proj._id);
-			console.log(proj.data);
-			console.log(proj.title);
-			console.log(proj.descr);
-			//console.log(id);
-			//$scope.proj._id="";
+	//Добавление в БД данных для массива colors
+	$scope.addData = function(proj) {
 			$http.put('/colortask_1/' + proj._id, proj).success(function(response) {	
 			//console.log($scope.proj._id);
 			console.log("This is response form controller from server to current project -- " + JSON.stringify(response) + "-- end of response");
 			refresh();
 		});
-	};
-
-	//Эта функция может отловить данные со скоупа
-	$scope.checkScope = function(proj) {
-			alert(proj._id + " " + proj.data + " " + proj.title + " " + proj.descr);
 	};
 	//////////////
 
@@ -95,10 +69,42 @@ Colortask1.controller('Colortask1Ctrl', ['$scope', '$http', function($scope, $ht
 			refresh();	
 			});	
 		};
-
-
-	console.log($scope.$$watchers);	
 }]);
+
+Colortask1.controller('ProjCtrl', ['$scope', '$http', function($scope, $http) { 
+
+$scope.setActive = function(proj_item) {
+		$scope.activeItem = proj_item;
+		//console.log($scope.activeMenu.data);
+	};
+
+	//$scope.activeItem = $scope.colortask_1[0].colors[0];
+	//console.log($scope.colortask_1[0].colors[0]);
+
+	/*$scope.colortask_1.map(function() {
+		$scope.activeItem = $scope.colortask_1[i].colors[0];
+	});*/
+
+	console.log($scope.colortask_1.length);
+	console.log($scope.colortask_1[0].colors[0]);
+
+	if ($scope.proj.colors) {
+		$scope.activeItem = $scope.proj.colors[0];
+	}
+
+	/*for(i=0; i < $scope.colortask_1.length; ++i) {
+		//Take a count of projects
+		//console.log($scope.colortask_1.length);
+		console.log("Hello");
+		for (j=0; j < $scope.colortask_1[i].colors.length; ++j) {
+			//Take a count of colors in each project
+				console.log($scope.colortask_1[i].colors[0].data);
+				return $scope.activeItem = $scope.colortask_1[j].colors[0];
+		};
+	};*/
+
+
+}]);	
 
 Colortask1.config(function($interpolateProvider) {
   $interpolateProvider.startSymbol('{[{');

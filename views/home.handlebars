@@ -2,29 +2,64 @@
 	<div class = "proj-container" id="mainCont">
 	<section>
 		<div ng-repeat = "proj in colortask_1">
-			<p>{[{proj._id}]} - <b>{[{proj.name}]}</b></p>
-				<form>
-				<label for="color">Color</label>
-				<input type="text" ng-model="proj.data">
-				<input type="color" id="colorPicker" ng-model="proj.data">
-				<label for="title">Title</label>
-				<input type="text" ng-model="proj.title">
-				<label for="descr">Description</label>
-				<input type="text" ng-model="proj.descr">
-				<button id="submit" class = "btn btn-primary" type = "submit" ng-click="addData()">Add</button>
-				<button id="submit" class = "btn btn-primary" type = "submit" ng-click="addData2(proj)">Add2</button>
-				<button id="submit" class = "btn btn-danger" type = "submit" ng-click="checkScope(proj)">Check Scope</button>
-				<button class = "btn btn-info" ng-click="update(proj._id)">Update</button>
-				<p>{[{proj.data}]}</p>
-				<p>{[{proj.title}]}</p>
-				<p>{[{proj.descr}]}</p>	
-			</form>
-			<div>
-				<div class = "proj-description" ng-repeat = "color in proj.colors">
-					<b>{[{color.data}]},</b>
-					<b>{[{color.title}]},</b>
-					<b>{[{color.descr}]}</b>
-					<br>	
+			<div ng-controller = "ProjCtrl">
+				<p>{[{proj._id}]} - <b>{[{proj.name}]}</b></p>
+					<form>
+					<label for="color">Color</label>
+					<input type="text" ng-model="proj.data">
+					<input type="color" id="colorPicker" ng-model="proj.data">
+					<label for="title">Title</label>
+					<input type="text" ng-model="proj.title">
+					<label for="descr">Description</label>
+					<input type="text" ng-model="proj.descr">
+					<button id="submit" class = "btn btn-primary" type = "submit" ng-click="addData(proj)">Add</button>
+					<button class = "btn btn-info" ng-click="update(proj._id)">Update</button>
+				</form>
+				<div>
+					<div class = "proj-description proj-color" ng-class = "{active : activeItem === color}" ng-click = "setActive(color)" ng-style = '{"background": (color.data)}' ng-repeat = "color in proj.colors">
+						<!--<b>{[{color.data}]},</b>
+						<b>{[{color.title}]},</b>
+						<b>{[{color.descr}]}</b>-->
+						<br>	
+					</div>
+				</div>
+				<div class="clearfix"></div>
+				<div>
+					<section class="proj-desc" ng-model="activeItem">
+						<div class = "color-flag" ng-style = '{"border-left-color": (activeItem.data)}'><b>C</b></div>	
+						<div class="container">
+							<div class="row">
+								<div class="col-md-3">
+									<h4>HEX</h4>
+									<p id = "hex_value">{[{activeItem.data}]}</p>
+								</div>
+								<div class="col-md-3">
+									<h4>HEX <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span> RGBA</h4>
+									<p></p>
+								</div>
+								<div class="col-md-3">
+									<h4>Title</h4>
+									<p>{[{activeItem.title}]}</p>
+								</div>
+								<div class="col-md-3">
+									<h4>Description</h4>
+									<p>{[{activeItem.descr}]}</p>
+								</div>
+							</div>
+							<div class="row decrc-btns">
+								<div class="col-md-6">
+									<div class="edit-btn-wrap">
+										<button class = "btn" ng-click="edit(activeItem._id)">edit</button>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="del-btn-wrap">
+										<button class = "btn" ng-click = "remove(activeItem._id)">delete</button>
+									</div>	
+								</div>
+							</div>	
+						</div>	
+					</section>
 				</div>
 			</div>			
 		</div>
