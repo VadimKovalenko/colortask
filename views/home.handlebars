@@ -1,14 +1,23 @@
-<div class  = "main-wrapper">	
+<div class  = "main-wrapper">
+	<div id="custom88"></div>	
 	<div class = "proj-container" id="mainCont">
-	<section class = "panel-group" id="accordion">
+	<section class = "panel-group" id="accordion2">
 		<div ng-repeat = "proj in colortask_1">
-			<div ng-controller = "ProjCtrl" class="panel panel-default">
-				<div class="panel-heading" ng-id = "proj_{[{$index+1}]}">
-					{[{$index+1}]}
-					<b>{[{proj.name}]}</b>
-					<a data-toggle="collapse" data-parent="#accordion" href="#collapse{[{$index+1}]}">Expand</a>
-				</div>	
-					<div id="collapse{[{$index+1}]}" class="panel-collapse collapse">
+			<div ng-attr-id="proj_{[{proj._id}]}" ng-controller = "ProjCtrl" class="panel panel-default">
+				<div class="row">
+					<div class="panel-heading">
+						<div class="col-md-10">
+							{[{$index+1}]}
+							<b>{[{proj.name}]}</b>
+							<a data-toggle="collapse" data-parent="#accordion" href="#collapse{[{$index+1}]}" ng-click="saveOpenProjId(proj._id)">Expand</a>
+						</div>
+					</div>
+					<div class="col-md-2">
+						<button ng-click="remove(proj._id)">Delete Project</button>	
+					</div>
+				</div>
+
+					<div id="collapse{[{$index+1}]}" class="panel-collapse collapse" my-main-directive>
 						<div class="panel-body">
 							<form>
 								<label for="color">Color</label>
@@ -29,7 +38,7 @@
 							<div class="clearfix"></div>
 							<div>
 								<section class="proj-desc" ng-model="activeItem">
-									<div class = "color-flag" ng-style = '{"border-left-color": (activeItem.data)}'><b>C</b></div>	
+									<div class = "color-flag" ng-show="activeItem" ng-style = '{"border-left-color": (activeItem.data)}'><b>C</b></div>	
 									<div class="container">
 										<div class="row">
 											<div class="col-md-3">

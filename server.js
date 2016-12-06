@@ -72,6 +72,7 @@ app.get('/colortask_1/:id', function (req, res) {
     res.json(doc);
   	});
 });
+*/
 
 app.delete('/colortask_1/:id', function (req, res) {
   var id = req.params.id;
@@ -81,6 +82,7 @@ app.delete('/colortask_1/:id', function (req, res) {
   });
 });
 
+/*
 app.put('/colortask_1/:id', function (req, res) {
 	var id = req.params.id;
 	//console.log("Update " + req.body.data);

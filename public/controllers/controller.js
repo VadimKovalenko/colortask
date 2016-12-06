@@ -1,6 +1,6 @@
 var Colortask1 = angular.module('Colortask1', []);
 Colortask1.controller('Colortask1Ctrl', ['$scope', '$http', function($scope, $http) {     
-	console.log("Hello World from controller");
+	//console.log("Hello World from controller");
 
 	//Получение доступа к данным через запрос get
 	var refresh = function() {
@@ -27,8 +27,8 @@ Colortask1.controller('Colortask1Ctrl', ['$scope', '$http', function($scope, $ht
 	//////////////
 
 
-	//Удаление из БД
-	/*$scope.remove = function(id) {
+	//Удаление проекта из БД
+	$scope.remove = function(id) {
 	  console.log(id);
 	  		$http.delete('/colortask_1/' + id).success(function(response) {
 	    	refresh();
@@ -36,7 +36,7 @@ Colortask1.controller('Colortask1Ctrl', ['$scope', '$http', function($scope, $ht
 	}; 
 
 	//Редактирование
-	$scope.edit = function(id) {
+	/*$scope.edit = function(id) {
 		console.log("Edit " + id);
 		$http.get('/colortask_1/' + id).success(function(response) {
 			//Bring data to the input form 
@@ -58,23 +58,52 @@ Colortask1.controller('Colortask1Ctrl', ['$scope', '$http', function($scope, $ht
 			refresh();	
 			});	
 		};
+
 }]);
 
+
+//Controller of current project
 Colortask1.controller('ProjCtrl', ['$scope', '$http', function($scope, $http) { 
 
-$scope.setActive = function(proj_item) {
+	$scope.setActive = function(proj_item) {
 		$scope.activeItem = proj_item;
 	};
-
-	console.log($scope.colortask_1.length);
-	console.log($scope.colortask_1[0].colors[0]);
 
 	//Set default item
 	if ($scope.proj.colors) {
 		$scope.activeItem = $scope.proj.colors[0];
 	}
 
-}]);	
+	//Save to LoacalStorage open accordion window
+	$scope.saveOpenProjId = function(id) {
+		var el = "#" + "proj_" + id + " .collapse";
+	      if (typeof(Storage) !== "undefined") {
+			   // Code for localStorage/sessionStorage.
+			   localStorage.setItem(id, el);
+			} else {
+			    // Sorry! No Web Storage support..
+			    console.log("Web Storage does not support");
+			}
+	};
+
+
+}]);
+
+//Директива для получения идентификатора и изменения его стилей в ng-repeat. Элемент просчитвает кол-во елементов в локальном хранилище повторно, в зависимости от того сколько элементов генерирует ng-repeat
+Colortask1.directive('myMainDirective', function() {
+ 	return function(scope, element, attrs) {
+ 		angular.element(document).ready(function () {
+ 			for (var i = 0, len = localStorage.length; i < len; ++i) {
+ 				var element = $(localStorage.getItem(localStorage.key(i)));
+ 				if(element.length > 0) { 
+			 		element.addClass("in");
+			 		console.log(element);
+		 		};
+	 		};
+ 		});
+	};//End of return statement	
+});
+
 
 Colortask1.config(function($interpolateProvider) {
   $interpolateProvider.startSymbol('{[{');
