@@ -33,11 +33,14 @@ app.post('/colortask_1', function (req, res) {
 //Добавление в БД Тестировка №2
 app.put('/colortask_1/:id', function (req, res) {
 	var id = req.params.id;
-	console.log("This is id from server: " + id);
-	//console.log("This is rquest body: " + JSON.stringify(req.body));
+	//console.log("This is id from server: " + id);
+	//console.log("This is request body: " + JSON.stringify(req.body));
+	console.log("Current id of a color is - " + req.body.color_id)
 	mycollections.findAndModify({query: {_id: mongojs.ObjectId(id)},
 				update: {$push: 
-					 {colors: {data: req.body.data,
+					 {colors: {
+					 	 color_id: req.body.color_id,	
+					 	 data: req.body.data,
 						 title: req.body.title,
 						 descr: req.body.descr}}},
 						 new: true},
@@ -64,15 +67,16 @@ app.get('/colortask_1', function (req, res) {
 		res.json(docs);
 	});
 });
-/*
-app.get('/colortask_1/:id', function (req, res) {
+
+//Получение данных с контроллера 
+app.get('/colortask_1/:id/edit_color/:e', function (req, res) {
 	var id = req.params.id;
-	console.log(id);
+	console.log("Current element from server - " + id);
 	mycollections.findOne({_id: mongojs.ObjectId(id)}, function (err, doc) {
-    res.json(doc);
+    	res.json(doc);
   	});
 });
-*/
+
 
 app.delete('/colortask_1/:id', function (req, res) {
   var id = req.params.id;

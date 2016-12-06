@@ -18,9 +18,14 @@ Colortask1.controller('Colortask1Ctrl', ['$scope', '$http', function($scope, $ht
 	//////////////
 	//Добавление в БД данных для массива colors
 	$scope.addData = function(proj) {
+			//Установка уникального id для каждого цвета
+			var d = new Date();
+			color_id = d.getTime();
+			proj.color_id = color_id;
+			console.log(color_id);
 			$http.put('/colortask_1/' + proj._id, proj).success(function(response) {	
 			//console.log($scope.proj._id);
-			console.log("This is response form controller from server to current project -- " + JSON.stringify(response) + "-- end of response");
+			//console.log("This is response form controller from server to current project -- " + JSON.stringify(response) + "-- end of response");
 			refresh();
 		});
 	};
@@ -35,17 +40,19 @@ Colortask1.controller('Colortask1Ctrl', ['$scope', '$http', function($scope, $ht
 	  });
 	}; 
 
-	//Редактирование
-	/*$scope.edit = function(id) {
-		console.log("Edit " + id);
-		$http.get('/colortask_1/' + id).success(function(response) {
+	//Редактирование (отображение данных в поле ввода)
+	$scope.edit = function(data, id) {
+		console.log("Edit " + data + " in project " + id);
+		var e = data.substr(1);
+		$http.get('/colortask_1/' + id + '/' + 'edit_color' + '/' + e).success(function(response) {
 			//Bring data to the input form 
-	   	$scope.proj = response;
+	   		$scope.activeItem = response;
+	   		console.log(response);
 	  });
 	};
 
 
-	$scope.update = function() {
+	/*$scope.update = function() {
 	console.log("Update " + $scope.proj._id);
 	$http.put('/colortask_1/' + $scope.proj._id, $scope.proj).success(function(response) {
 		refresh();
@@ -86,7 +93,6 @@ Colortask1.controller('ProjCtrl', ['$scope', '$http', function($scope, $http) {
 			}
 	};
 
-
 }]);
 
 //Директива для получения идентификатора и изменения его стилей в ng-repeat. Элемент просчитвает кол-во елементов в локальном хранилище повторно, в зависимости от того сколько элементов генерирует ng-repeat
@@ -97,7 +103,7 @@ Colortask1.directive('myMainDirective', function() {
  				var element = $(localStorage.getItem(localStorage.key(i)));
  				if(element.length > 0) { 
 			 		element.addClass("in");
-			 		console.log(element);
+			 		//console.log(element);
 		 		};
 	 		};
  		});
