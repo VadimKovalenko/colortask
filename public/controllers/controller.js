@@ -7,7 +7,7 @@ Colortask1.controller('Colortask1Ctrl', ['$scope', '$http', function($scope, $ht
 		$http.get('/colortask_1').success(function(response) {
 			console.log("I got the data I requested");
 			$scope.colortask_1 = response;
-   		$scope.proj = "";
+   			$scope.proj = "";
 		});
 	}
 
@@ -39,17 +39,6 @@ Colortask1.controller('Colortask1Ctrl', ['$scope', '$http', function($scope, $ht
 	    	refresh();
 	  });
 	}; 
-
-	//Редактирование (отображение данных в поле ввода)
-	$scope.edit = function(data, id) {
-		console.log("Edit " + data + " in project " + id);
-		var e = data.substr(1);
-		$http.get('/colortask_1/' + id + '/' + 'edit_color' + '/' + e).success(function(response) {
-			//Bring data to the input form 
-	   		$scope.activeItem = response;
-	   		console.log(response);
-	  });
-	};
 
 
 	/*$scope.update = function() {
@@ -92,6 +81,23 @@ Colortask1.controller('ProjCtrl', ['$scope', '$http', function($scope, $http) {
 			    console.log("Web Storage does not support");
 			}
 	};
+
+	//Редактирование цвета (отображение данных в поле ввода)
+	$scope.edit = function(activeItem, id, color_id) {
+		console.log("Edit " + activeItem.data + " in project " + id);
+		var e = activeItem.data.substr(1);
+		//color_id = $scope.proj.color_id;
+		console.log("Color id in controller is " + color_id);
+		$http.get('/colortask_1/' + id + '/' + 'edit_color' + '/' + color_id).success(function(response) {
+			//Bring data to the input form 
+	   		$scope.proj.data = response.colors[0].data;
+	   		$scope.proj.title = response.colors[0].title;
+	   		$scope.proj.descr = response.colors[0].descr;
+	   		console.log(response.colors[0].data);
+	  });
+	};
+
+
 
 }]);
 

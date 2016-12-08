@@ -1,3 +1,4 @@
+//Insert current color
 db.getCollection('colortask_1').update(
     // query 
     {
@@ -18,4 +19,36 @@ db.getCollection('colortask_1').update(
         "multi" : false,  // update only one document 
         "upsert" : false  // insert a new document, if no existing document match the query 
     }
+);
+
+//Get current color
+db.getCollection('colortask_1').find(
+    // query 
+    {
+        "colors.color_id" : 1481054980182.0
+    },
+    {
+        "_id" : ObjectId("58457d20e1e39c15f815a613"),
+        "colors" : {$elemMatch: {"color_id" : 1481054980182.0}} 
+    },
+    
+    // options 
+    {
+        "multi" : false,  // update only one document 
+        "upsert" : false  // insert a new document, if no existing document match the query 
+    }
+);
+
+//or this
+db.getCollection('colortask_1').find(
+    // query 
+    {"colors.color_id" : 1481137005132.0},
+    {"_id" : ObjectId("58457d20e1e39c15f815a613"), "colors" : {$elemMatch: {"color_id" : 1481137005132.0}}}
+);
+
+//or this
+db.getCollection('colortask_1').find(
+    // query
+    {"_id" : ObjectId("5848586ebd02e2115cc5bcf1")},
+    {"colors": {$elemMatch: {"color_id" : 1481137005132.0}}}
 );

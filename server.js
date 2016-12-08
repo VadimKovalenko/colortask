@@ -12,6 +12,8 @@ var mongojs = require('mongojs');
 var db = mongojs('colortask_1');
 var mycollections = db.collection('colortask_1');
 
+var ObjectId = require('mongojs').ObjectID;
+
 app.get('/', function(req, res){
 	res.render('home');
 })
@@ -68,23 +70,31 @@ app.get('/colortask_1', function (req, res) {
 	});
 });
 
-//Получение данных с контроллера 
-app.get('/colortask_1/:id/edit_color/:e', function (req, res) {
+
+//Получение данных конкретного цвета с контроллера для занесения в форму заполнения 
+app.get('/colortask_1/:id/edit_color/:color_id', function (req, res) {
+	console.log(req.url);
+	console.log("Parsed request body from EDIT function" + JSON.stringify(req.params));
 	var id = req.params.id;
+	//Идентификатор нужно преобразовать в число
+	var color_id = Number(req.params.color_id);
 	console.log("Current element from server - " + id);
-	mycollections.findOne({_id: mongojs.ObjectId(id)}, function (err, doc) {
-    	res.json(doc);
-  	});
+	console.log("Current color color_id - " + color_id);
+	//По id проекта и id цвета находим нужный цыет в массиве colors
+	mycollections.findOne(
+			{"_id" : ObjectId(id)},
+    		{"colors": {$elemMatch: {"color_id" : color_id}}},
+			/*{	
+				colors: {$elemMatch:{color_id: req.params.color_id}}
+			},*/
+			function (err, doc) {
+				res.json(doc);
+				console.log("Doc from edit middleware - " + JSON.stringify(doc));
+			});
 });
 
 
-app.delete('/colortask_1/:id', function (req, res) {
-  var id = req.params.id;
-  console.log(id);
-  mycollections.remove({_id: mongojs.ObjectId(id)}, function (err, doc) {
-    res.json(doc);
-  });
-});
+/*Подтреврждение редактирования цвета в массиве colors*/
 
 /*
 app.put('/colortask_1/:id', function (req, res) {
@@ -98,6 +108,15 @@ app.put('/colortask_1/:id', function (req, res) {
 			res.json(doc);
 		});
 });*/
+
+//Удаление проекта
+app.delete('/colortask_1/:id', function (req, res) {
+  var id = req.params.id;
+  console.log(id);
+  mycollections.remove({_id: mongojs.ObjectId(id)}, function (err, doc) {
+    res.json(doc);
+  });
+});
 
 
 var port = Number(process.env.PORT || 5000);
