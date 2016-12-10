@@ -28,7 +28,7 @@
 								<label for="descr">Description</label>
 								<input type="text" ng-model="proj.descr">
 								<button id="submit" class = "btn btn-primary" type = "submit" ng-click="addData(proj)">Add</button>
-								<button class = "btn btn-info" ng-click="update(proj._id)">Update</button>
+								<button class = "btn btn-info" ng-click="update(activeItem, proj._id)">Update</button>
 							</form>
 							<div>
 								<div class = "proj-description proj-color" ng-class = "{active : activeItem === color}" ng-click = "setActive(color)" ng-style = '{"background": (color.data)}' ng-repeat = "color in proj.colors">

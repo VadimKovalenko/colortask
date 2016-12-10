@@ -3,7 +3,7 @@ Colortask1.controller('Colortask1Ctrl', ['$scope', '$http', function($scope, $ht
 	//console.log("Hello World from controller");
 
 	//Получение доступа к данным через запрос get
-	var refresh = function() {
+	$scope.refresh = function() {
 		$http.get('/colortask_1').success(function(response) {
 			console.log("I got the data I requested");
 			$scope.colortask_1 = response;
@@ -11,7 +11,7 @@ Colortask1.controller('Colortask1Ctrl', ['$scope', '$http', function($scope, $ht
 		});
 	}
 
-	refresh();
+	$scope.refresh();
 
 
 
@@ -26,7 +26,7 @@ Colortask1.controller('Colortask1Ctrl', ['$scope', '$http', function($scope, $ht
 			$http.put('/colortask_1/' + proj._id, proj).success(function(response) {	
 			//console.log($scope.proj._id);
 			//console.log("This is response form controller from server to current project -- " + JSON.stringify(response) + "-- end of response");
-			refresh();
+			$scope.refresh();
 		});
 	};
 	//////////////
@@ -36,22 +36,15 @@ Colortask1.controller('Colortask1Ctrl', ['$scope', '$http', function($scope, $ht
 	$scope.remove = function(id) {
 	  console.log(id);
 	  		$http.delete('/colortask_1/' + id).success(function(response) {
-	    	refresh();
+	    	$scope.refresh();
 	  });
 	}; 
 
 
-	/*$scope.update = function() {
-	console.log("Update " + $scope.proj._id);
-	$http.put('/colortask_1/' + $scope.proj._id, $scope.proj).success(function(response) {
-		refresh();
-		});
-	};*/
-
 	$scope.addNewProject = function() {
 			$http.post('/colortask_1', $scope.proj).success(function(response) {
 			console.log(response);
-			refresh();	
+			$scope.refresh();	
 			});	
 		};
 
@@ -98,6 +91,12 @@ Colortask1.controller('ProjCtrl', ['$scope', '$http', function($scope, $http) {
 	};
 
 
+	//подтверждение редактирования цвета
+	$scope.update = function(activeItem, id, proj) {
+	$http.put('/colortask_1/' + id + '/' + 'update_color' + '/' + activeItem.color_id, $scope.proj).success(function(response) {
+			$scope.refresh();
+		});
+	};
 
 }]);
 

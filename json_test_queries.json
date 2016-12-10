@@ -52,3 +52,26 @@ db.getCollection('colortask_1').find(
     {"_id" : ObjectId("5848586ebd02e2115cc5bcf1")},
     {"colors": {$elemMatch: {"color_id" : 1481137005132.0}}}
 );
+
+//Updating color
+db.getCollection('colortask_1').update(
+    // query 
+    {
+      "_id" : ObjectId("58485875bd02e2115cc5bcf2"),
+      "colors": {$elemMatch: {"color_id" : 1481377487034.0}}
+    },
+    
+    // update 
+    {$set: {     
+        "colors.$.data": "#834565",    
+        "colors.$.title": "New updated title",
+        "colors.$.descr": "My new descr"    
+       }
+    },
+    
+    // options 
+    {
+        "multi" : false,  // update only one document 
+        "upsert" : false  // insert a new document, if no existing document match the query 
+    }
+);

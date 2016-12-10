@@ -73,41 +73,41 @@ app.get('/colortask_1', function (req, res) {
 
 //Получение данных конкретного цвета с контроллера для занесения в форму заполнения 
 app.get('/colortask_1/:id/edit_color/:color_id', function (req, res) {
-	console.log(req.url);
-	console.log("Parsed request body from EDIT function" + JSON.stringify(req.params));
 	var id = req.params.id;
 	//Идентификатор нужно преобразовать в число
 	var color_id = Number(req.params.color_id);
-	console.log("Current element from server - " + id);
-	console.log("Current color color_id - " + color_id);
 	//По id проекта и id цвета находим нужный цыет в массиве colors
 	mycollections.findOne(
 			{"_id" : ObjectId(id)},
     		{"colors": {$elemMatch: {"color_id" : color_id}}},
-			/*{	
-				colors: {$elemMatch:{color_id: req.params.color_id}}
-			},*/
 			function (err, doc) {
 				res.json(doc);
-				console.log("Doc from edit middleware - " + JSON.stringify(doc));
+				//console.log("Doc from edit middleware - " + JSON.stringify(doc));
 			});
 });
 
 
 /*Подтреврждение редактирования цвета в массиве colors*/
-
-/*
-app.put('/colortask_1/:id', function (req, res) {
+app.put('/colortask_1/:id/update_color/:color_id', function (req, res) {
 	var id = req.params.id;
-	//console.log("Update " + req.body.data);
-	mycollections.findAndModify({query: {_id: mongojs.ObjectId(id)},
-		update: {$set: {data: req.body.data,
-							 title: req.body.title,
-							 descr: req.body.descr}},
-		new: true}, function(err, doc) {
-			res.json(doc);
-		});
-});*/
+	var color_id = Number(req.params.color_id);
+	console.log("Update color from controller " + color_id);
+	mycollections.findAndModify({query:
+					{_id: mongojs.ObjectId(id),
+					"colors": {$elemMatch: {"color_id" : color_id}}},
+
+					update: {
+						$set: {
+							"colors.$.data": req.body.data,
+							"colors.$.title": req.body.title,
+							"colors.$.descr": req.body.descr
+						}
+					}},
+				function(err, doc, lastErrorObject) {
+					res.json(doc);
+					console.log("Doc from update middleware - " + JSON.stringify(doc));
+				});
+});
 
 //Удаление проекта
 app.delete('/colortask_1/:id', function (req, res) {
