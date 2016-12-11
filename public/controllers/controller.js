@@ -49,9 +49,12 @@ Colortask1.controller('Colortask1Ctrl', ['$scope', '$http', function($scope, $ht
 		};
 
 	$scope.savePrjName = function(proj) {
-		console.log(proj._id);
-		console.log(proj.name);
-		$http.put('/colortask_1/edit_name/' + proj._id + '/' + proj.name, proj).success(function(response) {
+		//Optimized data for put query
+		var x = {
+			id: proj._id,
+			name: proj.name
+		}
+		$http.put('/colortask_1/edit_name/' + x.id + '/' + x.name, x).success(function(response) {
 			$scope.refresh();
 		});
 	};	

@@ -73,8 +73,8 @@ app.post('/new', function (req, res) {
 //Редактирование имени проекта
 app.put('/colortask_1/edit_name/:id/:name', function (req, res) {
 	var id = req.params.id;
-	console.log(id);
-	console.log("Name of project is " + JSON.stringify(req.body));
+	//console.log(id);
+	//console.log("Name of project is " + JSON.stringify(req.body));
 	mycollections.findAndModify({query: {_id: mongojs.ObjectId(id)},
 					update: {
 						$set: {
@@ -83,7 +83,7 @@ app.put('/colortask_1/edit_name/:id/:name', function (req, res) {
 					}},			
 			function (err, doc) {
 				res.json(doc);
-				console.log("Doc from edit project name middleware - " + JSON.stringify(doc));
+				//console.log("Doc from edit project name middleware - " + JSON.stringify(doc));
 			});
 });
 
