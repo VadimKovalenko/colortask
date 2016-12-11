@@ -21,9 +21,19 @@ app.get('/', function(req, res){
 app.use('/public', express.static('public'));
 app.use(bodyParser.json());
 
+//Вывод всех данных с базы
+app.get('/colortask_1', function (req, res) {
+	//console.log("I received a GET request");
+	mycollections.find(function(err, docs) {
+		//console.log(docs);
+		//Data back to the controller
+		res.json(docs);
+	});
+});
+
 //Для просмотра отправленных данных можно заглянуть в директорию http://localhost:5000/colortask_1
 app.post('/colortask_1', function (req, res) {
-	console.log(req.body);
+	//console.log(req.body);
 	//doc - item that we parsed
 	mycollections.insert(req.body, function(err, docs) {
 		//Send back data to the controller
@@ -37,7 +47,7 @@ app.put('/colortask_1/:id', function (req, res) {
 	var id = req.params.id;
 	//console.log("This is id from server: " + id);
 	//console.log("This is request body: " + JSON.stringify(req.body));
-	console.log("Current id of a color is - " + req.body.color_id)
+	//console.log("Current id of a color is - " + req.body.color_id)
 	mycollections.findAndModify({query: {_id: mongojs.ObjectId(id)},
 				update: {$push: 
 					 {colors: {
@@ -50,7 +60,7 @@ app.put('/colortask_1/:id', function (req, res) {
 		//Send back data to the controller
 		res.json(docs);
 	});
-	});
+});
 
 //Создание нового проекта
 app.post('/new', function (req, res) {
@@ -60,14 +70,21 @@ app.post('/new', function (req, res) {
 	db.createCollection("NewCollection");
 });
 
-//Вывод всех данных с базы в консоль
-app.get('/colortask_1', function (req, res) {
-	console.log("I received a GET request");
-	mycollections.find(function(err, docs) {
-		console.log(docs);
-		//Data back to the controller
-		res.json(docs);
-	});
+//Редактирование имени проекта
+app.put('/colortask_1/edit_name/:id/:name', function (req, res) {
+	var id = req.params.id;
+	console.log(id);
+	console.log("Name of project is " + JSON.stringify(req.body));
+	mycollections.findAndModify({query: {_id: mongojs.ObjectId(id)},
+					update: {
+						$set: {
+							name: req.body.name,
+						}
+					}},			
+			function (err, doc) {
+				res.json(doc);
+				console.log("Doc from edit project name middleware - " + JSON.stringify(doc));
+			});
 });
 
 
@@ -134,7 +151,7 @@ app.delete('/colortask_1/delete_color/:id/:color_id', function (req, res) {
 //Удаление проекта
 app.delete('/colortask_1/:id', function (req, res) {
   var id = req.params.id;
-  console.log(id);
+  //console.log(id);
   mycollections.remove({_id: mongojs.ObjectId(id)}, function (err, doc) {
     res.json(doc);
   });

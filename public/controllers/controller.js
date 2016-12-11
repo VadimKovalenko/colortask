@@ -5,7 +5,7 @@ Colortask1.controller('Colortask1Ctrl', ['$scope', '$http', function($scope, $ht
 	//Получение доступа к данным через запрос get
 	$scope.refresh = function() {
 		$http.get('/colortask_1').success(function(response) {
-			console.log("I got the data I requested");
+			//console.log("I got the data I requested");
 			$scope.colortask_1 = response;
    			$scope.proj = "";
 		});
@@ -43,10 +43,18 @@ Colortask1.controller('Colortask1Ctrl', ['$scope', '$http', function($scope, $ht
 
 	$scope.addNewProject = function() {
 			$http.post('/colortask_1', $scope.proj).success(function(response) {
-			console.log(response);
-			$scope.refresh();	
+				//console.log(response);
+				$scope.refresh();	
 			});	
 		};
+
+	$scope.savePrjName = function(proj) {
+		console.log(proj._id);
+		console.log(proj.name);
+		$http.put('/colortask_1/edit_name/' + proj._id + '/' + proj.name, proj).success(function(response) {
+			$scope.refresh();
+		});
+	};	
 
 }]);
 
@@ -86,7 +94,7 @@ Colortask1.controller('ProjCtrl', ['$scope', '$http', function($scope, $http) {
 	   		$scope.proj.data = response.colors[0].data;
 	   		$scope.proj.title = response.colors[0].title;
 	   		$scope.proj.descr = response.colors[0].descr;
-	   		console.log(response.colors[0].data);
+	   		//console.log(response.colors[0].data);
 	  });
 	};
 

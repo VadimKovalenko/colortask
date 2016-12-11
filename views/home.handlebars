@@ -8,12 +8,16 @@
 					<div class="panel-heading">
 						<div class="col-md-10">
 							{[{$index+1}]}
-							<b>{[{proj.name}]}</b>
-							<a data-toggle="collapse" data-parent="#accordion" href="#collapse{[{$index+1}]}" ng-click="saveOpenProjId(proj._id)">Expand</a>
+							<b><span ng-show="!isEditingName">{[{proj.name}]}</span></b>
+							<input type="text" ng-show="isEditingName" ng-model="proj.name" />
+							<button class = "btn" ng-show="isEditingName" ng-click="savePrjName(proj)">save</button>
+							<button class = "btn" ng-show="isEditingName" ng-click='isEditingName = !isEditingName'>cancel</button>
+							<button class = "btn" ng-click='isEditingName = !isEditingName' ng-show="!isEditingName">edit name</button>
 						</div>
 					</div>
 					<div class="col-md-2">
-						<button ng-click="remove(proj._id)">Delete Project</button>	
+						<button ng-click="remove(proj._id)">Delete Project</button>
+						<a data-toggle="collapse" data-parent="#accordion" href="#collapse{[{$index+1}]}" ng-click="saveOpenProjId(proj._id)">Expand</a>
 					</div>
 				</div>
 
