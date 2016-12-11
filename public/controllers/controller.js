@@ -34,10 +34,12 @@ Colortask1.controller('Colortask1Ctrl', ['$scope', '$http', function($scope, $ht
 
 	//Удаление проекта из БД
 	$scope.remove = function(id) {
-	  console.log(id);
+		if (confirm("Are you sure want to delete this project?")) {	
+	  		console.log(id);
 	  		$http.delete('/colortask_1/' + id).success(function(response) {
 	    	$scope.refresh();
-	  });
+	  		});
+	  	};
 	}; 
 
 
@@ -102,19 +104,23 @@ Colortask1.controller('ProjCtrl', ['$scope', '$http', function($scope, $http) {
 	};
 
 	//подтверждение редактирования цвета
-	$scope.updateColor = function(activeItem, id, proj) {	
-	$http.put('/colortask_1/' + id + '/' + 'update_color' + '/' + activeItem.color_id, $scope.proj).success(function(response) {
-			$scope.refresh();
-		});
+	$scope.updateColor = function(activeItem, id, proj) {
+		if (confirm("Are you sure want to update this color?")) {	
+			$http.put('/colortask_1/' + id + '/' + 'update_color' + '/' + activeItem.color_id, $scope.proj).success(function(response) {
+					$scope.refresh();
+				});
+		};
 	};
 
 	$scope.removeColor = function(color_id, id) {
 		console.log(id);
 		console.log(color_id);
+		if (confirm("Are you sure want to delete this color?")) {
 		$http.delete('/colortask_1/delete_color/' + id + '/' +  color_id).success(function(response) {
 			$scope.refresh();
-		}) 
-	}
+		});
+		}; 
+	};
 
 }]);
 
