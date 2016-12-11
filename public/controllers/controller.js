@@ -78,7 +78,7 @@ Colortask1.controller('ProjCtrl', ['$scope', '$http', function($scope, $http) {
 	//Редактирование цвета (отображение данных в поле ввода)
 	$scope.edit = function(activeItem, id, color_id) {
 		console.log("Edit " + activeItem.data + " in project " + id);
-		var e = activeItem.data.substr(1);
+		//var e = activeItem.data.substr(1);
 		//color_id = $scope.proj.color_id;
 		console.log("Color id in controller is " + color_id);
 		$http.get('/colortask_1/' + id + '/' + 'edit_color' + '/' + color_id).success(function(response) {
@@ -90,13 +90,20 @@ Colortask1.controller('ProjCtrl', ['$scope', '$http', function($scope, $http) {
 	  });
 	};
 
-
 	//подтверждение редактирования цвета
-	$scope.update = function(activeItem, id, proj) {
+	$scope.updateColor = function(activeItem, id, proj) {	
 	$http.put('/colortask_1/' + id + '/' + 'update_color' + '/' + activeItem.color_id, $scope.proj).success(function(response) {
 			$scope.refresh();
 		});
 	};
+
+	$scope.removeColor = function(color_id, id) {
+		console.log(id);
+		console.log(color_id);
+		$http.delete('/colortask_1/delete_color/' + id + '/' +  color_id).success(function(response) {
+			$scope.refresh();
+		}) 
+	}
 
 }]);
 

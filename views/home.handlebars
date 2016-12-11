@@ -28,7 +28,7 @@
 								<label for="descr">Description</label>
 								<input type="text" ng-model="proj.descr">
 								<button id="submit" class = "btn btn-primary" type = "submit" ng-click="addData(proj)">Add</button>
-								<button class = "btn btn-info" ng-click="update(activeItem, proj._id)">Update</button>
+								<button class = "btn btn-info" ng-click="updateColor(activeItem, proj._id)">Update</button>
 							</form>
 							<div>
 								<div class = "proj-description proj-color" ng-class = "{active : activeItem === color}" ng-click = "setActive(color)" ng-style = '{"background": (color.data)}' ng-repeat = "color in proj.colors">
@@ -67,7 +67,7 @@
 											</div>
 											<div class="col-md-6">
 												<div class="del-btn-wrap">
-													<button class = "btn" ng-click = "remove(activeItem._id)">delete</button>
+													<button class = "btn" ng-click = "removeColor(activeItem.color_id, proj._id)">delete</button>
 												</div>	
 											</div>
 										</div>	

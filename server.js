@@ -109,6 +109,28 @@ app.put('/colortask_1/:id/update_color/:color_id', function (req, res) {
 				});
 });
 
+//Удаление цвета из проекта
+app.delete('/colortask_1/delete_color/:id/:color_id', function (req, res) {
+  var id = req.params.id;
+  //console.log("Params Delete color " + req.params.color_id + " from project " + id);
+  //console.log("Body Delete color " + req.params.color_id + " from project " + id);
+  var color_id = Number(req.params.color_id);
+  mycollections.findAndModify({query:
+					{_id: mongojs.ObjectId(id)},
+
+					update: {
+						$pull: {
+							colors: {"color_id" : color_id} 
+						}
+					},
+    				},
+	function (err, doc) {
+		res.json(doc);
+		console.log("Doc from remove color middleware - " + JSON.stringify(doc));
+	});
+});
+
+
 //Удаление проекта
 app.delete('/colortask_1/:id', function (req, res) {
   var id = req.params.id;
