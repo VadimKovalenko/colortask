@@ -2,6 +2,13 @@ var express = require('express');
 var app = express();
 var exphbs = require('express3-handlebars');
 var bodyParser = require('body-parser');
+//Modules for autorization
+var cookieParser = require('cookie-parser');
+var expressValidator = require('express-validator');
+//var flash = require('connect-flash');
+var session = require('express-session');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 
 app.engine('handlebars',
 	exphbs({defaultLayout: 'main'}));
@@ -14,13 +21,55 @@ var mycollections = db.collection('colortask_1');
 
 var ObjectId = require('mongojs').ObjectID;
 
+// Express Session
+app.use(session({
+	secret: 'secret',
+	saveUninitialized: true,
+	resave: true
+}));
+
+// Passport init
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Global Vars
+/*app.use(function (req, res, next) {
+	res.locals.success_msg = req.flash('success_msg');
+	res.locals.error_msg = req.flash('error_msg');
+	res.locals.error = req.flash('error');
+	res.locals.user = req.user || null;
+	next();
+});*/
+
+// Express Validator
+app.use(expressValidator({
+  errorFormatter: function(param, msg, value) {
+      var namespace = param.split('.')
+      , root    = namespace.shift()
+      , formParam = root;
+
+    while(namespace.length) {
+      formParam += '[' + namespace.shift() + ']';
+    }
+    return {
+      param : formParam,
+      msg   : msg,
+      value : value
+    };
+  }
+}));
+
+// Connect Flash
+//app.use(flash());
+
 app.get('/', function(req, res){
 	res.render('home');
-})
+});
 
 app.use('/public', express.static('public'));
 app.use(bodyParser.json());
-
+//app.use(bodyParser.unlencoded({ extended: false }));
+app.use(cookieParser());
 //Вывод всех данных с базы
 app.get('/colortask_1', function (req, res) {
 	//console.log("I received a GET request");

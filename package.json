@@ -12,5 +12,15 @@
     "nodemon": "^1.11.0"
   },
   "dependencies": {
+      "bcryptjs": "*",
+      "connect-flash": "*",
+      "cookie-parser": "^1.4.1",
+      "express-messages": "*",
+      "express-session": "*",
+      "express-validator": "*",
+      "passport": "*",
+      "passport-http": "*",
+      "passport-local": "*" 
+
   }
 }
