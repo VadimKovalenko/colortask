@@ -120,6 +120,7 @@ header {
 
 footer {
 	position: relative;
-	bottom: 0px;
-	color: grey;
+    bottom: 0px;
+    color: grey;
+    margin-bottom: 15px;
 }

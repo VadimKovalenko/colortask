@@ -8,6 +8,7 @@ Colortask1.controller('Colortask1Ctrl', ['$scope', '$http', function($scope, $ht
 			//console.log("I got the data I requested");
 			$scope.colortask_1 = response;
    			$scope.proj = "";
+   			//console.log($scope.colortask_1);
 		});
 	}
 
@@ -25,7 +26,7 @@ Colortask1.controller('Colortask1Ctrl', ['$scope', '$http', function($scope, $ht
 			console.log(color_id);
 			$http.put('/colortask_1/' + proj._id, proj).success(function(response) {	
 			//console.log($scope.proj._id);
-			//console.log("This is response form controller from server to current project -- " + JSON.stringify(response) + "-- end of response");
+			console.log("This is response form controller from server to current project -- " + JSON.stringify(response) + "-- end of response");
 			$scope.refresh();
 		});
 	};
