@@ -87,14 +87,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-
-
-
 //Users routes
 var routes = require('./routes/index');
 var users = require('./routes/users');
-
-
 
 // Global Vars
 app.use(function (req, res, next) {
@@ -117,8 +112,6 @@ app.use('/public', express.static('public'));
 /*app.get('/', function(req, res){
 	res.render('home');
 });*/
-
-
 
 //Вывод всех данных с базы MONGOJS
 /*app.get('/colortask_1', function (req, res) {
@@ -213,14 +206,6 @@ app.put('/colortask_1/:id', function (req, res) {
     )
 });
 
-//Создание нового проекта (НЕ УЧАСТВУЕТ В ПРОЕКТЕ)
-/*app.post('/new', function (req, res) {
-	console.log("Message from the server.js: " + req.query('token'));
-	res.json(req.body);
-	//console.log(res.json(req.body));
-	db.createCollection("NewCollection");
-});*/
-
 //Редактирование имени проекта с помощью MongoJS
 /*app.put('/colortask_1/edit_name/:id/:name', function (req, res) {
 	var id = req.params.id;
@@ -252,7 +237,7 @@ app.put('/colortask_1/edit_name/:id/:name', function (req, res) {
 });
 
 
-//Получение данных конкретного цвета с контроллера для занесения в форму заполнения 
+//Получение данных конкретного цвета с контроллера для занесения в форму заполнения с помощью MongoJS
 /*app.get('/colortask_1/:id/edit_color/:color_id', function (req, res) {
 	var id = req.params.id;
 	//Идентификатор нужно преобразовать в число
@@ -267,8 +252,23 @@ app.put('/colortask_1/edit_name/:id/:name', function (req, res) {
 			});
 });*/
 
+//Получение данных конкретного цвета с контроллера для занесения в форму заполнения с помощью MONGOOSE
+app.get('/colortask_1/:id/edit_color/:color_id', function (req, res) {
+  var id = req.params.id;
+  //Идентификатор нужно преобразовать в число
+  var color_id = Number(req.params.color_id);
+  //По id проекта и id цвета находим нужный цыет в массиве colors
+  Proj.findOne(
+      {_id : id},
+        {"colors": {$elemMatch: {"color_id" : color_id}}},
+      function (err, doc) {
+        res.json(doc);
+        //console.log("Doc from edit middleware - " + JSON.stringify(doc));
+      });
+});
 
-/*Подтреврждение редактирования цвета в массиве colors*/
+
+/*Подтреврждение редактирования цвета в массиве colors с помощью MongoJS */
 /*app.put('/colortask_1/:id/update_color/:color_id', function (req, res) {
 	var id = req.params.id;
 	var color_id = Number(req.params.color_id);
@@ -289,6 +289,25 @@ app.put('/colortask_1/edit_name/:id/:name', function (req, res) {
 					console.log("Doc from update middleware - " + JSON.stringify(doc));
 				});
 });*/
+
+/*Подтреврждение редактирования цвета в массиве colors с помощью MONGOOSE */
+app.put('/colortask_1/:id/update_color/:color_id', function (req, res) {
+  var id = req.params.id;
+  var color_id = Number(req.params.color_id);
+  console.log("Update color from controller " + req.body.data);
+  Proj.update(
+          {"colors": {$elemMatch: {"color_id" : color_id}}},
+          {$set: {
+              "colors.$.data": req.body.data,
+              "colors.$.title": req.body.title,
+              "colors.$.descr": req.body.descr
+            }
+          },
+        function(err, doc) {
+          res.json(doc);
+          console.log("Doc from update color middleware - " + JSON.stringify(doc));
+        });
+});
 
 //Удаление цвета из проекта с помощью MongoJS
 /*app.delete('/colortask_1/delete_color/:id/:color_id', function (req, res) {
