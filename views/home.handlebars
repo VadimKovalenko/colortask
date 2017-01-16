@@ -11,7 +11,7 @@
 							<b><span ng-show="!isEditingName">{[{proj.name}]}</span></b>
 							<input type="text" ng-show="isEditingName" ng-model="proj.name" />
 							<button class = "btn" ng-show="isEditingName" ng-click="savePrjName(proj)">save</button>
-							<button class = "btn" ng-show="isEditingName" ng-click='isEditingName = !isEditingName'>cancel</button>
+							<button class = "btn" ng-show="isEditingName" ng-click='isEditingName = !isEditingName; refresh()'>cancel</button>
 							<button class = "btn" ng-click='isEditingName = !isEditingName' ng-show="!isEditingName">edit name</button>
 						</div>
 					</div>

@@ -2,6 +2,14 @@ header {
 	text-align: center;
 }
 
+header img{
+	width: 20%;
+}
+
+
+.welcome-user {
+	text-align: center;
+}
 .new-prj {
 	text-align: center;
 	margin-top: 40px;

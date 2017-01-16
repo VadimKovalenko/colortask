@@ -20,22 +20,23 @@
 <body ng-controller = "Colortask1Ctrl">
 	<div class="container">
 	<header>
-		<a href = "/"><img src="../public/img/logo-1.png" alt=""></a>
+		<a href = "/"><img src="../public/img/logo-vector.svg" alt=""></a>
 	</header>
 	<nav class = "clearfix">
         <ul class="nav nav-pills pull-right">
 	        {{#if user}}
 	       	<li role="presentation"><a href="/">Dashboard</a></li>
 	        <li role="presentation"><a href="/users/logout">Logout</a></li>
-	        <li role="presentation"><a href="/my_route">My test route</a></li>
-	        <h5>Current user is {{user.username}}</h5>	
+	        <!--<li role="presentation"><a href="/my_route">My test route</a></li>-->
 	        {{else}}
 	        <li role="presentation"><a href="/users/login">Login</a></li>
 	        <li role="presentation"><a href="/users/register">Register</a></li>
 	        {{/if}}
        	</ul>
     </nav>
-
+	{{#if user}}
+		<h3 class = "welcome-user">Welcome, {{user.username}}</h3>
+	{{/if}}	
       <div class="row">
         <div class="col-lg-12">
         	{{#if success_msg}}
