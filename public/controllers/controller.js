@@ -14,8 +14,6 @@ Colortask1.controller('Colortask1Ctrl', ['$scope', '$http', function($scope, $ht
 
 	$scope.refresh();
 
-
-
 	//////////////
 	//Добавление в БД данных для массива colors
 	$scope.addData = function(proj) {

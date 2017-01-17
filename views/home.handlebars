@@ -2,9 +2,9 @@
 	<div id="custom88"></div>	
 	<div class = "proj-container" id="mainCont">
 	<section class = "panel-group" id="accordion2">
-		<div ng-repeat = "proj in colortask_1">
+		<div ng-repeat = "proj in colortask_1" ng-class="{'first': $first, 'last': $last}">
 			<div ng-attr-id="proj_{[{proj._id}]}" ng-controller = "ProjCtrl" class="panel panel-default">
-				<div class="row">
+				<div class="row panel-heading-row">
 					<div class="panel-heading">
 						<div class="col-md-10">
 							{[{$index+1}]}
@@ -14,10 +14,11 @@
 							<button class = "btn" ng-show="isEditingName" ng-click='isEditingName = !isEditingName; refresh()'>cancel</button>
 							<button class = "btn" ng-click='isEditingName = !isEditingName' ng-show="!isEditingName">edit name</button>
 						</div>
-					</div>
-					<div class="col-md-2">
-						<button ng-click="remove(proj._id)">Delete Project</button>
-						<a data-toggle="collapse" data-parent="#accordion" href="#collapse{[{$index+1}]}" ng-click="saveOpenProjId(proj._id)">Expand</a>
+						<div class="col-md-2">
+							<button ng-click="remove(proj._id)">Delete Project</button>
+							<a data-toggle="collapse" data-parent="#accordion" href="#collapse{[{$index+1}]}" ng-click="saveOpenProjId(proj._id)" class="collapseBtn"><i class = "glyphicon glyphicon-triangle-bottom"></i></a>
+						</div>
+						<div class="clearfix"></div>
 					</div>
 				</div>
 
@@ -51,14 +52,10 @@
 												<p id = "hex_value">{[{activeItem.data}]}</p>
 											</div>
 											<div class="col-md-3">
-												<h4>HEX <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span> RGBA (id for now)</h4>
-												<p>{[{activeItem.color_id}]}</p>
-											</div>
-											<div class="col-md-3">
 												<h4>Title</h4>
 												<p>{[{activeItem.title}]}</p>
 											</div>
-											<div class="col-md-3">
+											<div class="col-md-6">
 												<h4>Description</h4>
 												<p>{[{activeItem.descr}]}</p>
 											</div>

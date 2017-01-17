@@ -1,3 +1,17 @@
+html {
+	min-height: 100%;
+}
+
+body {
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,ffffff+71,9ff5ff+100 */
+	background: #ffffff; /* Old browsers */
+	background: -moz-linear-gradient(top,  #ffffff 0%, #ffffff 71%, #9ff5ff 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top,  #ffffff 0%,#ffffff 71%,#9ff5ff 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom,  #ffffff 0%,#ffffff 71%,#9ff5ff 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#9ff5ff',GradientType=0 ); /* IE6-9 */
+	min-height: 100%;
+}
+
 header {
 	text-align: center;
 }
@@ -6,9 +20,39 @@ header img{
 	width: 20%;
 }
 
+.panel-heading-row {
+	margin: 0 !important;
+}
+
+.panel-group .panel,
+.panel-group>.first .panel-heading {
+	border-top-left-radius: 15px !important;
+	border-top-right-radius: 15px !important;
+}
+
+.panel-group>.last .panel,
+.panel-group>.last .panel-heading {
+	border-bottom-left-radius: 15px !important;
+	border-bottom-right-radius: 15px !important;
+}
+
+.panel-group .panel {
+}
+
+.panel-heading {
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#dd8127+0,ff664d+100 */
+	background: #dd8127; /* Old browsers */
+	background: -moz-linear-gradient(top,  #dd8127 0%, #ff664d 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top,  #dd8127 0%,#ff664d 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom,  #dd8127 0%,#ff664d 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dd8127', endColorstr='#ff664d',GradientType=0 ); /* IE6-9 */
+
+}
 
 .welcome-user {
 	text-align: center;
+	margin-top: 0;
+	margin-bottom: 20px;
 }
 .new-prj {
 	text-align: center;
@@ -131,4 +175,5 @@ footer {
     bottom: 0px;
     color: grey;
     margin-bottom: 15px;
+    margin-top: 15px;
 }
