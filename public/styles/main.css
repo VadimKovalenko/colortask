@@ -20,6 +20,26 @@ header img{
 	width: 20%;
 }
 
+.prj-name,
+.prj-count {
+	color: #fff;
+	font-size: 16px;
+}
+
+.remove-prjname-btn,
+.edit-prjname-btn {
+	color: #333;
+	text-decoration: underline;
+	background: none;
+	border: none;
+}
+
+.collapseBtn {
+	color: #555;
+	float: right;
+	padding-top: 3px;
+}
+
 .panel-heading-row {
 	margin: 0 !important;
 }
@@ -36,7 +56,8 @@ header img{
 	border-bottom-right-radius: 15px !important;
 }
 
-.panel-group .panel {
+.panel-heading-right-block {
+	padding-top: 7px;
 }
 
 .panel-heading {
@@ -158,16 +179,21 @@ header img{
 	text-align: right;
 }
 
+
+.save-prjname-btn,
 .edit-btn-wrap button {
 	background: #00a651;
+	color: #fff;
 }
 
 .decrc-btns .del-btn-wrap {
 	text-align: left;
 }
 
+.cancel-prjname-btn,
 .del-btn-wrap button {
 	background: #0072bc;
+	color: #fff;
 }
 
 footer {

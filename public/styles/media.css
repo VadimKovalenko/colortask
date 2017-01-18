@@ -1,0 +1,26 @@
+@media screen and (max-width: 991px) {
+	.decrc-btns .edit-btn-wrap,
+	.decrc-btns .del-btn-wrap
+	 {
+		text-align: center;
+	}
+
+	.decrc-btns .edit-btn-wrap {
+		margin-bottom: 20px;
+	}
+
+	.collapseBtn {
+		font-size: 20px;
+	}
+
+	.add-prj-btn
+	{
+		margin-left: 43%;
+		margin-top: 20px;
+		margin-right: 15px;
+	}
+
+	.update-prj-btn {
+		margin-top: 20px;
+	}
+}

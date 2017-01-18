@@ -2,8 +2,9 @@
 <html lang="en" ng-app="Colortask1">
 <head>
 	<meta charset="UTF-8">
-	<title>ColorTask-1</title>
-	<link type= "text/css" rel="stylesheet" href="../public/styles/main.css">	
+	<title>ColorTask</title>
+	<link type= "text/css" rel="stylesheet" href="../public/styles/main.css">
+	<link type= "text/css" rel="stylesheet" href="../public/styles/media.css">	
 	<!--jQuery-->
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"
 			  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
@@ -25,7 +26,7 @@
 	<nav class = "clearfix">
         <ul class="nav nav-pills pull-right">
 	        {{#if user}}
-	       	<li role="presentation"><a href="/">Dashboard</a></li>
+	       	<!--<li role="presentation"><a href="/">Dashboard</a></li>-->
 	        <li role="presentation"><a href="/users/logout">Logout</a></li>
 	        <!--<li role="presentation"><a href="/my_route">My test route</a></li>-->
 	        {{else}}

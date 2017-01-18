@@ -6,16 +6,16 @@
 			<div ng-attr-id="proj_{[{proj._id}]}" ng-controller = "ProjCtrl" class="panel panel-default">
 				<div class="row panel-heading-row">
 					<div class="panel-heading">
-						<div class="col-md-10">
-							{[{$index+1}]}
-							<b><span ng-show="!isEditingName">{[{proj.name}]}</span></b>
+						<div class="col-md-10 col-sm-6 panel-heading-left-block">
+							<b class = "prj-count">{[{$index+1}]}.</b>
+							<b class = "prj-name"><span ng-show="!isEditingName">{[{proj.name}]}</span></b>
 							<input type="text" ng-show="isEditingName" ng-model="proj.name" />
-							<button class = "btn" ng-show="isEditingName" ng-click="savePrjName(proj)">save</button>
-							<button class = "btn" ng-show="isEditingName" ng-click='isEditingName = !isEditingName; refresh()'>cancel</button>
-							<button class = "btn" ng-click='isEditingName = !isEditingName' ng-show="!isEditingName">edit name</button>
+							<button class = "btn save-prjname-btn" ng-show="isEditingName" ng-click="savePrjName(proj)">save</button>
+							<button class = "btn cancel-prjname-btn" ng-show="isEditingName" ng-click='isEditingName = !isEditingName; refresh()'>cancel</button>
+							<button class = "btn edit-prjname-btn" ng-click='isEditingName = !isEditingName' ng-show="!isEditingName">edit name</button>
 						</div>
-						<div class="col-md-2">
-							<button ng-click="remove(proj._id)">Delete Project</button>
+						<div class="col-md-2 col-sm-6 panel-heading-right-block">
+							<button ng-click="remove(proj._id)" class = "remove-prjname-btn">Delete Project</button>
 							<a data-toggle="collapse" data-parent="#accordion" href="#collapse{[{$index+1}]}" ng-click="saveOpenProjId(proj._id)" class="collapseBtn"><i class = "glyphicon glyphicon-triangle-bottom"></i></a>
 						</div>
 						<div class="clearfix"></div>
@@ -32,8 +32,8 @@
 								<input type="text" ng-model="proj.title">
 								<label for="descr">Description</label>
 								<input type="text" ng-model="proj.descr">
-								<button id="submit" class = "btn btn-primary" type = "submit" ng-click="addData(proj)">Add</button>
-								<button class = "btn btn-info"  class="md-primary md-raised" ng-click="updateColor(activeItem, proj._id)">Update</button>
+								<button id="submit" class = "btn btn-primary add-prj-btn" type = "submit" ng-click="addData(proj)">Add</button>
+								<button class = "btn btn-info update-prj-btn" ng-click="updateColor(activeItem, proj._id)">Update</button>
 							</form>
 							<div>
 								<div class = "proj-description proj-color" ng-class = "{active : activeItem === color}" ng-click = "setActive(color)" ng-style = '{"background": (color.data)}' ng-repeat = "color in proj.colors">
